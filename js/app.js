@@ -1,5 +1,5 @@
 // ============================================================
-//  STOCKPILOT — Main Application Logic
+//  STOCKPILOT — Main Application Logic=
 // ============================================================
 
 import { auth, db } from "./firebase-config.js";
