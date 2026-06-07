@@ -9,13 +9,14 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-aut
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId:             "YOUR_APP_ID"
-};
+    apiKey: "AIzaSyA-MPoguxhDN5C2ih2mA6q4BHeX6coUJKI",
+    authDomain: "stockpilot-1dafe.firebaseapp.com",
+    projectId: "stockpilot-1dafe",
+    storageBucket: "stockpilot-1dafe.firebasestorage.app",
+    messagingSenderId: "1093603749848",
+    appId: "1:1093603749848:web:6805db814af42297868cad",
+    measurementId: "G-0JSN13VJRL"
+  };
 
 // Initialize Firebase
 const app  = initializeApp(firebaseConfig);
