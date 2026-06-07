@@ -19,9 +19,9 @@
   --text: #e8eaf0;
   --text-2: #9aa3b2;
   --text-3: #5a6375;
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   --radius: 8px;
   --radius-lg: 14px;
   --sidebar-w: 240px;
@@ -30,14 +30,14 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { font-size: 15px; }
+html { font-size: 15.5px; }
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.65;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -261,7 +261,9 @@ select option { background: var(--surface-2); }
   letter-spacing: -0.03em;
   color: var(--text);
 }
-.stat-card.accent .stat-value { color: var(--accent); }
+.stat-card.clickable { cursor: pointer; }
+.stat-card.clickable:hover { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.stat-hint { font-size: 0.65rem; opacity: 0.6; margin-left: 0.3rem; font-family: var(--font-mono); }
 
 /* ——— TABLE ——— */
 .section-header {

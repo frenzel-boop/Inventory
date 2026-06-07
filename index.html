@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Frenzel — Inventory System</title>
+  <title>StockPilot — Inventory System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -19,7 +19,7 @@
     <div class="auth-card">
       <div class="auth-logo">
         <span class="logo-icon">⬡</span>
-        <span class="logo-text">Frenzel</span>
+        <span class="logo-text">StockPilot</span>
       </div>
       <h1 class="auth-title">Sign In</h1>
       <p class="auth-sub">Access your inventory dashboard</p>
@@ -33,7 +33,7 @@
       </div>
       <div id="auth-error" class="error-msg hidden"></div>
       <button class="btn btn-primary full" id="login-btn">Sign In</button>
-      <p class="auth-footer">Don't have an account? <span class="link" id="show-register">Sayaw ka muna.</span></p>
+      <p class="auth-footer">Don't have an account? <span class="link" id="show-register">Request access from admin</span></p>
     </div>
   </div>
 
@@ -43,7 +43,7 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <span class="logo-icon">⬡</span>
-        <span class="logo-text">Frnzl</span>
+        <span class="logo-text">StockPilot</span>
         <button class="sidebar-close" id="sidebar-close">✕</button>
       </div>
       <nav class="sidebar-nav">
@@ -89,8 +89,8 @@
             <div class="stat-label">Total Items</div>
             <div class="stat-value" id="stat-total">—</div>
           </div>
-          <div class="stat-card accent">
-            <div class="stat-label">Low Stock</div>
+          <div class="stat-card accent clickable" id="low-stock-card" title="View low stock items">
+            <div class="stat-label">Low Stock <span class="stat-hint">↗ View</span></div>
             <div class="stat-value" id="stat-low">—</div>
           </div>
           <div class="stat-card">
@@ -125,6 +125,14 @@
           <input type="text" class="search-box" id="search-box" placeholder="Search items..." />
           <select class="filter-select" id="cat-filter">
             <option value="">All Categories</option>
+          </select>
+          <select class="filter-select" id="sort-select">
+            <option value="">Sort: Default</option>
+            <option value="low-stock">⚠ Low Stock First</option>
+            <option value="qty-asc">Qty: Low → High</option>
+            <option value="qty-desc">Qty: High → Low</option>
+            <option value="name-asc">Name: A → Z</option>
+            <option value="name-desc">Name: Z → A</option>
           </select>
         </div>
         <div class="table-wrap">

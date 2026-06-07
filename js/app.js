@@ -191,11 +191,30 @@ function renderDashboard() {
 }
 
 // ——— INVENTORY TABLE ———
-function renderInventory(filter = "", cat = "") {
+function getStockPriority(item) {
+  const qty = item.quantity ?? 0;
+  const thr = item.threshold ?? 5;
+  if (qty === 0)   return 0; // Out of stock — top
+  if (qty <= thr)  return 1; // Low stock
+  return 2;                  // In stock
+}
+
+function renderInventory(filter = "", cat = "", sort = "") {
   const isAdmin = currentRole === "admin";
-  let items = allItems;
+  let items = [...allItems];
   if (filter) items = items.filter(i => (i.name + i.sku + i.category).toLowerCase().includes(filter.toLowerCase()));
   if (cat)    items = items.filter(i => i.category === cat);
+  if (sort === "low-stock") {
+    items.sort((a, b) => getStockPriority(a) - getStockPriority(b));
+  } else if (sort === "qty-asc") {
+    items.sort((a, b) => (a.quantity ?? 0) - (b.quantity ?? 0));
+  } else if (sort === "qty-desc") {
+    items.sort((a, b) => (b.quantity ?? 0) - (a.quantity ?? 0));
+  } else if (sort === "name-asc") {
+    items.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  } else if (sort === "name-desc") {
+    items.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
+  }
   $("inventory-body").innerHTML = items.length
     ? items.map(item => `<tr>
         <td><strong>${esc(item.name)}</strong>${item.description ? `<br><small style="color:var(--text-3)">${esc(item.description)}</small>` : ""}</td>
@@ -231,8 +250,15 @@ function populateCatSuggestions() {
   $("cat-suggestions").innerHTML = cats.map(c => `<option value="${esc(c)}"></option>`).join("");
 }
 
-$("search-box").addEventListener("input", () => renderInventory($("search-box").value, $("cat-filter").value));
-$("cat-filter").addEventListener("change", () => renderInventory($("search-box").value, $("cat-filter").value));
+$("low-stock-card").addEventListener("click", () => {
+  navigateTo("inventory");
+  $("sort-select").value = "low-stock";
+  renderInventory($("search-box").value, $("cat-filter").value, "low-stock");
+});
+
+  () => renderInventory($("search-box").value, $("cat-filter").value, $("sort-select").value));
+$("cat-filter").addEventListener("change", () => renderInventory($("search-box").value, $("cat-filter").value, $("sort-select").value));
+$("sort-select").addEventListener("change", () => renderInventory($("search-box").value, $("cat-filter").value, $("sort-select").value));
 
 // ——— ADD / EDIT ITEM ———
 $("add-item-btn").addEventListener("click", () => openItemModal());
